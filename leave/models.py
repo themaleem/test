@@ -1,4 +1,5 @@
 import uuid
+from datetime import timedelta, date
 
 from django.db import models
 from django.contrib.auth.models import User
@@ -51,3 +52,14 @@ class Request(models.Model):
         if not self.approver:
             return "None yet"
         return self.approver.get_full_name()
+
+    @property
+    def work_days_in_leave_period(self):
+        date_count = self.start_date
+        work_days = 0
+        while date_count <= self.end_date:
+            # 0 - 5 are work days
+            if date_count.weekday() < 5:
+                work_days += 1
+            date_count += timedelta(days=1)
+        return work_days

@@ -1,17 +1,20 @@
 from rest_framework import serializers
-from .models import Employee, Request
+from .models import User, Request
 
 # class UserSerializer(serializers.ModelSerializer):
 
 
-class RequestSerializer(serializers.HyperlinkedModelSerializer):
+class RequestSerializer(serializers.ModelSerializer):
+    work_days_in_leave_period = serializers.ReadOnlyField()
+
     class Meta:
         model = Request
         fields = (
-            "url",
+            # "url",
             "pk",
             "start_date",
             "end_date",
+            "work_days_in_leave_period",
             "submission_date",
             "employee",
             "requestor_remark",
@@ -23,13 +26,13 @@ class RequestSerializer(serializers.HyperlinkedModelSerializer):
         )
 
 
-class UserRequestSerializer(serializers.HyperlinkedModelSerializer):
+class UserRequestSerializer(serializers.ModelSerializer):
     requests = RequestSerializer(many=True, read_only=True)
 
     class Meta:
         model = User
         fields = (
-            "url",
+            # "url",
             "pk",
             "full_name",
             "email",
