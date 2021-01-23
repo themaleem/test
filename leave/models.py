@@ -112,3 +112,14 @@ class Request(models.Model):
                 work_days += 1
             date_count += timedelta(days=1)
         return work_days
+
+
+class IpAddress(models.Model):
+    pub_date = models.DateTimeField(auto_now_add=True)
+    ip_address = models.GenericIPAddressField()
+
+    def __str__(self):
+        return f"{self.ip_address}"
+
+    class Meta:
+        verbose_name_plural = "IP addresses"
