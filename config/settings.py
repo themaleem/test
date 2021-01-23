@@ -31,6 +31,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     "leave.middleware.SaveIpAddressMiddleware",
     "corsheaders.middleware.CorsMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -110,18 +111,11 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 
-# # CUSTOM USER SETTINGS
-# AUTH_USER_MODEL = "leave.User"
-
 # CORS SETTINGS
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
 ]
-
-
-#
-# udlczsnhzuubrkfx
 
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
@@ -166,3 +160,9 @@ SIMPLE_JWT = {
 }
 
 AUTH_USER_MODEL = "leave.User"
+
+
+# Configure Django App for Heroku.
+import django_heroku
+
+django_heroku.settings(locals())
