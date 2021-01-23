@@ -1,10 +1,22 @@
+from djoser.serializers import UserCreateSerializer
 from rest_framework import serializers
-from .models import User, Request
+from django.contrib.auth import get_user_model
 
-# class UserSerializer(serializers.ModelSerializer):
+from .models import Request
+
+User = get_user_model()
+
+
+class UserCreateSerializer(UserCreateSerializer):
+    class Meta(UserCreateSerializer.Meta):
+        model = User
+        fields = ("id", "email", "first_name", "last_name", "password")
 
 
 class RequestSerializer(serializers.ModelSerializer):
+    # employee = serializers.SlugRelatedField(
+    #     queryset=User.objects.all(), slug_field="get_full_name"
+    # )
     work_days_in_leave_period = serializers.ReadOnlyField()
 
     class Meta:
