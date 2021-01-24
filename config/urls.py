@@ -6,6 +6,5 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("leave.urls")),
     path("auth/", include("djoser.urls")),
-    path("auth/token/", TokenObtainPairView.as_view()),
-    path("auth/token/refresh", TokenRefreshView.as_view()),
+    path("auth/", include("djoser.urls.jwt")),
 ]

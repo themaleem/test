@@ -14,9 +14,7 @@ class UserCreateSerializer(UserCreateSerializer):
 
 
 class RequestSerializer(serializers.ModelSerializer):
-    # employee = serializers.SlugRelatedField(
-    #     queryset=User.objects.all(), slug_field="get_full_name"
-    # )
+    employee = serializers.SlugRelatedField(slug_field="first_name", read_only=True)
     work_days_in_leave_period = serializers.ReadOnlyField()
 
     class Meta:
@@ -34,6 +32,20 @@ class RequestSerializer(serializers.ModelSerializer):
             "approver_remark",
             "approval_date",
             "leave_type",
+            "status",
+        )
+
+
+class RequestApproveOrDeclineSerializer(serializers.ModelSerializer):
+    approver = serializers.SlugRelatedField(slug_field="first_name", read_only=True)
+    partial = True
+
+    class Meta:
+        model = Request
+        fields = (
+            "approver",
+            "approver_remark",
+            "approval_date",
             "status",
         )
 
