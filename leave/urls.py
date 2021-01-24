@@ -6,19 +6,11 @@ app_name = "leave"
 
 urlpatterns = [
     path("", views.api_root),
+    path("auth/users/mee", views.mee),
     path("leave/", views.leave_list),
     path("leave/<int:pk>/", views.leave_detail),
-    path("pending-leaves/", views.pending_leaves),
-    path("accept/<int:pk>/", views.approve_leave),
-    path("decline/<int:pk>", views.decline_leave),
+    path("admin-leaves/", views.admin_leaves),
+    path("approve/<int:pk>/", views.approve_leave),
+    path("decline/<int:pk>/", views.decline_leave),
+    path("all-ips/", views.all_ips),
 ]
-
-
-# urlpatterns = [
-#     path("", views.api_root),
-#     # path("create/", views.create_leave),
-#     # path("pending", views.get_all_pending_leaves),
-#     # path("accepted", views.get_all_accepted_leaves),
-#     # path("declined", views.get_all_declined_leaves),
-#     # path("accept/<int:pk>", views.leave_accept),
-# ]

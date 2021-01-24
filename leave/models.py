@@ -50,6 +50,9 @@ class User(AbstractBaseUser, PermissionsMixin):
     def get_short_name(self):
         return self.first_name
 
+    def is_admin(self):
+        return self.is_superuser()
+
     def __str__(self):
         return self.email
 
